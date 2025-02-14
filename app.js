@@ -19,6 +19,11 @@ const helmet=require('helmet');
  app.use(mongosanitize());
  app.use(xss());
  app.use(hpp());
+ //mongoose
+ const mongoose= require("mongoose");
+
+mongoose.set('strictQuery', false);
+mongoose.set('strictQuery', true);
 
 //rate limit
 const limiter = rateLimit({
@@ -26,6 +31,21 @@ const limiter = rateLimit({
     Max:100 
 })
 app.use(limiter);
+
+
+
+
+//mongodb gatabase connection
+
+let URI="mongodb://127.0.0.1:27017/schools";
+let OPTION={user:'',pass:''};
+mongoose.connect(URI,OPTION,(error)=>{
+    console.log("Connection Success");
+    console.log(error);
+})
+
+
+
 
 
 
